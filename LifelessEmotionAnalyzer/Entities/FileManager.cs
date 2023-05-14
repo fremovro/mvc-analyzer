@@ -18,11 +18,13 @@ namespace LifelessEmotionAnalyzer.Entities
         /// <param name="numUpTimeStart"></param>
         /// <param name="numUpTimeRange"></param>
         /// <param name="dataContext"></param>
-        public Dictionary<int, WavFileModel> ReadWavFiles(OpenFileDialog fileDialog, NumericUpDown numUpTimeStart, NumericUpDown numUpTimeRange)
+        public Dictionary<int, WavFileModel> ReadWavFiles(OpenFileDialog fileDialog, NumericUpDown numUpTimeStart, NumericUpDown numUpTimeRange, ProgressBar fileProgressBar)
         {
             var index = 0;
             var result = new Dictionary<int, WavFileModel>();
 
+            fileProgressBar.Value = 0;
+            fileProgressBar.Maximum = fileDialog.FileNames.Length;
             foreach (var file in fileDialog.FileNames)
             {
                 using (FileStream fileStream = new FileStream(file, FileMode.Open))
@@ -87,6 +89,7 @@ namespace LifelessEmotionAnalyzer.Entities
 
                     index++;
                 }
+                fileProgressBar.PerformStep();
             }
 
             return result;

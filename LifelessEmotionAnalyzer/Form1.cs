@@ -24,7 +24,8 @@ namespace LifelessEmotionAnalyzer
             InitializeComponent();
 
             controllers.Add(new ReadWavFileController(this));
-            controllers.Add(new DpfController(this));
+            controllers.Add(new CalculateController(this));
+            controllers.Add(new NetworkController(this));
         }
     }
 }
